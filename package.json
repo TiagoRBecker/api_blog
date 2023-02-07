@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "tsc && copyfiles -u 1 src/**/** /dist",
+    "postinstall": "tsc",
     "build": "tsc",
     "dev": "nodemon -e ts,json src/server.ts",
     "start": "node dist/server.js"
