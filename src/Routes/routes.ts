@@ -74,6 +74,6 @@ routes.post("/categories", CategorieController.CreateCategorie);
 
 
 //Files
-routes.post('/upload',chekingToken,Upload, UserController.UpdateProfile )
+routes.post('/user/profile',chekingToken,Upload, UserController.UpdateProfile )
 
 export default routes;
