@@ -55,5 +55,5 @@ routes.get("/categories/:id", Categories_1.CategorieController.GetCategoriesId);
 routes.post("/categories", Categories_1.CategorieController.CreateCategorie);
 //Update Routes
 //Files
-routes.post('/upload', ChekingErrors_2.chekingToken, multer_1.Upload, Users_1.UserController.UpdateProfile);
+routes.post('/user/profile', ChekingErrors_2.chekingToken, multer_1.Upload, Users_1.UserController.UpdateProfile);
 exports.default = routes;
