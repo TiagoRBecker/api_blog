@@ -52,4 +52,6 @@ routes.get("/categories", Categories_1.CategorieController.GetCategories);
 routes.get("/categories/:id", Categories_1.CategorieController.GetCategoriesId);
 routes.post("/categories", Categories_1.CategorieController.CreateCategorie);
 //Update Routes
+
+
 exports.default = routes;

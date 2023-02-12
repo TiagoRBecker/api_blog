@@ -7,19 +7,20 @@ import { UserService } from "../../../services/Users/usersService";
 export const Signin = async (req:Request, res:Response)=>{
     const secret = process.env.SECRET
     const { email , password} = req.body
-    const authLogin = await  UserService.findUser(email, password)
    
-     const name = authLogin?.name
-     const id= authLogin?.id
+    const authLogin = await  UserService.findUser(email, password)
+    const user ={id:authLogin?.id, name:authLogin?.name, avatar:authLogin?.avatar, email:authLogin?.email}
+    
     
     try {
         if(authLogin){
             const token = JWT.sign({
                 id:authLogin.id,
-                name:authLogin.name
+                name:authLogin.name,
+                avatar:authLogin.avatar
             },secret as string ,{ expiresIn:"2h"})
             
-            res.status(200).json({ user:{id,name}, token, msg:"Usuario logado com sucesso" })
+            res.status(200).json({ user, token, msg:"Usuario logado com sucesso" })
         }
         
     } catch (error) {

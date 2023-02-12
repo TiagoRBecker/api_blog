@@ -9,7 +9,8 @@ declare global {
            user: { 
                id:number,
                name:string,
-               email:string
+               email:string,
+               avatar:string
             }
        }
    }
@@ -35,6 +36,9 @@ export const ChekingUser = async (
   next: NextFunction
 ) => {
   const { email, password } = req.body;
+  if(!email || !password){
+    return res.status(404).json({msg:"Preencha os campos vazios"})
+  }
   const chekUser = await UserService.findUser(email, password);
   if (!chekUser?.email) {
     return res.status(404).json({ msg: "E-mail não cadastrado no sistema" });
@@ -78,6 +82,7 @@ export const chekingToken = async (
         if(getUser){
          
          req.user =  getUser as any
+         console.log(req.user.id)
          next()
          
         }

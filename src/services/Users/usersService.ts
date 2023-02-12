@@ -2,7 +2,7 @@ import {PrismaClient} from "@prisma/client"
 const prisma = new PrismaClient()
 
 export const UserService = {
-    findUserById: async (id:string)=>{
+    findUserById: async (id:number)=>{
         return await prisma.user.findUnique({
             where:{
               id:Number(id)
@@ -11,9 +11,12 @@ export const UserService = {
                 id:true,
                 name:true,
                 email:true,
-                posts:true
+                avatar:true
+                
 
             }
+           
+            
             
             
         })
@@ -22,6 +25,13 @@ export const UserService = {
         return await prisma.user.findUnique({
             where:{
                 email:email
+            },
+            select:{
+                id:true,
+                name:true,
+                email:true,
+                password:true,
+                avatar:true
             }
            
             
@@ -48,8 +58,24 @@ export const UserService = {
                 id:true,
                 name:true,
                 email:true,
-                posts:true
+                avatar:true,
+                
             }
         })
+    },
+    updateProfile: async (id:number,name?:string,email?:string,avatar?:string,)=>{
+        return await prisma.user.update({
+            where:{
+                id:id
+            },
+            data:{
+                name:name,
+                email:email,
+                avatar:avatar,
+                
+
+            }
+        })
+
     }
 }

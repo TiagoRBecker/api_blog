@@ -84,13 +84,14 @@ export  const PostServices ={
         
     },
    
-    createPost: async (title:string, content:string, authorId:number, categoriesId:number, url?:string)=>{
+    createPost: async (title:string, content:string, authorId:number,authorName:string,  categoriesId:number, url?:string)=>{
        
        return await prisma.post.create({ 
         data:{
             
             title:title,
             content:content,
+            authorName:authorName,
             authorId:authorId,
             categoriesId:categoriesId,
             url:url

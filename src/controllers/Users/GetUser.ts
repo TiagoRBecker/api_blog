@@ -6,17 +6,18 @@ declare global {
             user: { 
                 id:number,
                 name:string,
-                email:string
+                email:string,
+                avatar:string
              }
         }
     }
 }
 export const GetUser = async (req:Request, res:Response)=>{
        
-       const { id,name,email }= req.user
+       const { id }= req.user
       
-     const userDados = await UserService.getUserData(Number(id))
-     return res.status(200).json({ user:{id,name,email},userDados})
+     const userDados = await UserService.findUserById(id)
+     return res.status(200).json( {userDados})
      
 
 

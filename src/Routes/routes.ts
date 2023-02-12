@@ -1,12 +1,16 @@
 import { Router, Request, Response } from "express";
 import { CategorieController } from "../controllers/Categories";
-
 import { PostController } from "../controllers/Posts/index";
 import { UserController } from "../controllers/Users";
 import { ErrorCheking } from "../middlewares/Post/index";
-
 import { ChekingEmail, ChekingUser } from "../middlewares/Users/ChekingErrors";
 import { chekingToken } from "../middlewares/Users/ChekingErrors";
+import { Upload } from "../helpers/config/multer";
+
+
+
+
+
 
 const routes = Router();
 routes.get("/teste", async (req: Request, res: Response) => {
@@ -25,7 +29,7 @@ routes.get("/likeposts", PostController.GetLikePost);
 routes.get("/posts/:id", PostController.GetOnePost);
 routes.get("/views", PostController.GetViews);
 //Posts Create Routes
-routes.post("/posts", PostController.CreatePost);
+routes.post("/posts",Upload, PostController.CreatePost);
 //Posts Update Routes
 routes.put("/posts/:id", PostController.UpdatePost);
 
@@ -54,11 +58,22 @@ routes.get("/user/me", chekingToken, UserController.GetUser);
 routes.post("/user/signup", ChekingEmail, UserController.UserCreate);
 routes.post("/user/signin", ChekingUser, UserController.Signin);
 
+//User Put Routes
+
 //Categories Get Routes
 routes.get("/categories", CategorieController.GetCategories);
 routes.get("/categories/:id", CategorieController.GetCategoriesId);
 routes.post("/categories", CategorieController.CreateCategorie);
 
 //Update Routes
+
+
+
+
+
+
+
+//Files
+routes.post('/upload',chekingToken,Upload, UserController.UpdateProfile )
 
 export default routes;

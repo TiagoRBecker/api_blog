@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 export const GetAllPost = async (req:Request,res:Response)=>{
     
    const  post = await PostServices.getAll()
-      if(post.length >=1){
+      if(post){
         return res.status(200).json({post})
       }
       res.status(404).json({msg:"Não encontrados posts no sistema"})
@@ -15,7 +15,7 @@ export const GetAllPost = async (req:Request,res:Response)=>{
 export const GetLikePost = async (req:Request,res:Response)=>{
     
   const  post = await PostServices.getLikePost()
-     if(post.length >=1){
+     if(post){
        return res.status(200).json({post})
      }
      res.status(404).json({msg:"Não encontrados posts no sistema"})
@@ -48,7 +48,7 @@ export const GetLastPost = async (req:Request,res:Response)=>{
     
     
      const lastPost = await PostServices.getLastPost()
-      if(lastPost.length >= 1){
+      if(lastPost){
         return res.status(200).json({lastPost})
       }
     res.status(404).json({msg:"Não encontrados  posts no sistema"})
