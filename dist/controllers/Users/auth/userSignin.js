@@ -19,15 +19,15 @@ const Signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const secret = process.env.SECRET;
     const { email, password } = req.body;
     const authLogin = yield usersService_1.UserService.findUser(email, password);
-    const name = authLogin === null || authLogin === void 0 ? void 0 : authLogin.name;
-    const id = authLogin === null || authLogin === void 0 ? void 0 : authLogin.id;
+    const user = { id: authLogin === null || authLogin === void 0 ? void 0 : authLogin.id, name: authLogin === null || authLogin === void 0 ? void 0 : authLogin.name, avatar: authLogin === null || authLogin === void 0 ? void 0 : authLogin.avatar, email: authLogin === null || authLogin === void 0 ? void 0 : authLogin.email };
     try {
         if (authLogin) {
             const token = jsonwebtoken_1.default.sign({
                 id: authLogin.id,
-                name: authLogin.name
+                name: authLogin.name,
+                avatar: authLogin.avatar
             }, secret, { expiresIn: "2h" });
-            res.status(200).json({ user: { id, name }, token, msg: "Usuario logado com sucesso" });
+            res.status(200).json({ user, token, msg: "Usuario logado com sucesso" });
         }
     }
     catch (error) {

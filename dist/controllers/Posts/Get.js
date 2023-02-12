@@ -14,7 +14,7 @@ const postServices_1 = require("../../services/Posts/postServices");
 // Get All post from the system
 const GetAllPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const post = yield postServices_1.PostServices.getAll();
-    if (post.length >= 1) {
+    if (post) {
         return res.status(200).json({ post });
     }
     res.status(404).json({ msg: "Não encontrados posts no sistema" });
@@ -23,7 +23,7 @@ exports.GetAllPost = GetAllPost;
 //Get Posts whit like  6+
 const GetLikePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const post = yield postServices_1.PostServices.getLikePost();
-    if (post.length >= 1) {
+    if (post) {
         return res.status(200).json({ post });
     }
     res.status(404).json({ msg: "Não encontrados posts no sistema" });
@@ -49,7 +49,7 @@ exports.GetOnePost = GetOnePost;
 //Get last five posts from the system 
 const GetLastPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const lastPost = yield postServices_1.PostServices.getLastPost();
-    if (lastPost.length >= 1) {
+    if (lastPost) {
         return res.status(200).json({ lastPost });
     }
     res.status(404).json({ msg: "Não encontrados  posts no sistema" });

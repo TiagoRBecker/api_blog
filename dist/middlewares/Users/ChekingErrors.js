@@ -27,6 +27,9 @@ const ChekingEmail = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
 exports.ChekingEmail = ChekingEmail;
 const ChekingUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(404).json({ msg: "Preencha os campos vazios" });
+    }
     const chekUser = yield usersService_1.UserService.findUser(email, password);
     if (!(chekUser === null || chekUser === void 0 ? void 0 : chekUser.email)) {
         return res.status(404).json({ msg: "E-mail não cadastrado no sistema" });
@@ -55,6 +58,7 @@ const chekingToken = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             const getUser = yield usersService_1.UserService.findUserById(id);
             if (getUser) {
                 req.user = getUser;
+                console.log(req.user.id);
                 next();
             }
         }));

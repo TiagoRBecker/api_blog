@@ -77,11 +77,12 @@ exports.PostServices = {
             }
         });
     }),
-    createPost: (title, content, authorId, categoriesId, url) => __awaiter(void 0, void 0, void 0, function* () {
+    createPost: (title, content, authorId, authorName, categoriesId, url) => __awaiter(void 0, void 0, void 0, function* () {
         return yield prisma.post.create({
             data: {
                 title: title,
                 content: content,
+                authorName: authorName,
                 authorId: authorId,
                 categoriesId: categoriesId,
                 url: url

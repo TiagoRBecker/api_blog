@@ -13,11 +13,8 @@ exports.GetCategoriesId = exports.GetCategories = void 0;
 const categoriesService_1 = require("../../services/Categories/categoriesService");
 const GetCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const get = yield categoriesService_1.CategoriesService.findCategories();
-    if (get.length > 0) {
+    if (get) {
         return res.status(200).json({ get });
-    }
-    else {
-        res.status(404).json({ msg: "Não encontramos categorias no sistema" });
     }
 });
 exports.GetCategories = GetCategories;

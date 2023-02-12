@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetUser = void 0;
 const usersService_1 = require("../../services/Users/usersService");
 const GetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id, name, email } = req.user;
-    const userDados = yield usersService_1.UserService.getUserData(Number(id));
-    return res.status(200).json({ user: { id, name, email }, userDados });
+    const { id } = req.user;
+    const userDados = yield usersService_1.UserService.findUserById(id);
+    return res.status(200).json({ userDados });
 });
 exports.GetUser = GetUser;

@@ -22,7 +22,7 @@ exports.UserService = {
                 id: true,
                 name: true,
                 email: true,
-                posts: true
+                avatar: true
             }
         });
     }),
@@ -30,6 +30,13 @@ exports.UserService = {
         return yield prisma.user.findUnique({
             where: {
                 email: email
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                password: true,
+                avatar: true
             }
         });
     }),
@@ -51,7 +58,19 @@ exports.UserService = {
                 id: true,
                 name: true,
                 email: true,
-                posts: true
+                avatar: true,
+            }
+        });
+    }),
+    updateProfile: (id, name, email, avatar) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                name: name,
+                email: email,
+                avatar: avatar,
             }
         });
     })

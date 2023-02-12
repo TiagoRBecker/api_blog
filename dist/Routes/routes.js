@@ -16,6 +16,7 @@ const Users_1 = require("../controllers/Users");
 const index_2 = require("../middlewares/Post/index");
 const ChekingErrors_1 = require("../middlewares/Users/ChekingErrors");
 const ChekingErrors_2 = require("../middlewares/Users/ChekingErrors");
+const multer_1 = require("../helpers/config/multer");
 const routes = (0, express_1.Router)();
 routes.get("/teste", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -32,7 +33,7 @@ routes.get("/likeposts", index_1.PostController.GetLikePost);
 routes.get("/posts/:id", index_1.PostController.GetOnePost);
 routes.get("/views", index_1.PostController.GetViews);
 //Posts Create Routes
-routes.post("/posts", index_1.PostController.CreatePost);
+routes.post("/posts", multer_1.Upload, index_1.PostController.CreatePost);
 //Posts Update Routes
 routes.put("/posts/:id", index_1.PostController.UpdatePost);
 routes.put("/posts/:id/views", index_1.PostController.UpdateView);
@@ -47,11 +48,12 @@ routes.get("/user/me", ChekingErrors_2.chekingToken, Users_1.UserController.GetU
 //User Post Routes
 routes.post("/user/signup", ChekingErrors_1.ChekingEmail, Users_1.UserController.UserCreate);
 routes.post("/user/signin", ChekingErrors_1.ChekingUser, Users_1.UserController.Signin);
+//User Put Routes
 //Categories Get Routes
 routes.get("/categories", Categories_1.CategorieController.GetCategories);
 routes.get("/categories/:id", Categories_1.CategorieController.GetCategoriesId);
 routes.post("/categories", Categories_1.CategorieController.CreateCategorie);
 //Update Routes
-
-
+//Files
+routes.post('/upload', ChekingErrors_2.chekingToken, multer_1.Upload, Users_1.UserController.UpdateProfile);
 exports.default = routes;

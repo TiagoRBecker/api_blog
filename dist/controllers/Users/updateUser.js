@@ -9,21 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreatePost = void 0;
-const postServices_1 = require("../../services/Posts/postServices");
+exports.UpdateProfile = void 0;
 const cloudinary_1 = require("cloudinary");
-const CreatePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const usersService_1 = require("../../services/Users/usersService");
+const UpdateProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const { title, content, authorId, authorName, categoriesId, } = req.body;
     const result = yield cloudinary_1.v2.uploader.upload((_a = req.file) === null || _a === void 0 ? void 0 : _a.path, {
-        public_id: `${Math.floor(Math.random() * 99999)}_post`,
+        public_id: `${Math.floor(Math.random() * 99999)}_profile`,
+        width: 500,
+        height: 500,
         crop: 'fill',
     });
-    const url = result.url;
-    const create = yield postServices_1.PostServices.createPost(title, content, Number(authorId), authorName, Number(categoriesId), url);
-    if (create) {
-        return res.status(201).json({ create });
+    const { id } = req.user;
+    const { name, email } = req.body;
+    const avatar = result.url;
+    try {
+        if (result.url) {
+            const userUpdate = yield usersService_1.UserService.updateProfile(id, name, email, avatar);
+            res.json({ msg: " Perfil atualizado com sucesso", userUpdate });
+        }
     }
-    res.status(500).json({ msg: "Não foi possivel criar o post , tente novamente mais tarde" });
+    catch (error) {
+        res.status(404).json({ msg: "Não foi possível atualizar o seu perfil" });
+        console.log(error);
+    }
 });
-exports.CreatePost = CreatePost;
+exports.UpdateProfile = UpdateProfile;
