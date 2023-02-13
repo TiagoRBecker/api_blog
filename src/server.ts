@@ -12,10 +12,12 @@ const url_tree = process.env.URL_3
 dotenv.config()
 
 const app = express();
-app.use(cors({
-  credentials:true,
-  origin:[url_one as string,url_two as string,url_tree as string] 
-}))
+app.use((req,res,next)=>{
+  res.setHeader('Access-Control-Allow-Origin',"http://localhost:3000");
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Access-Control-Allow-Methods','*');
+  next(); 
+})
 
 
 
