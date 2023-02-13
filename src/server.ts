@@ -12,12 +12,13 @@ const url_tree = process.env.URL_3
 dotenv.config()
 
 const app = express();
-app.use(cors({
-  credentials:false,
-  origin:[url_one as string,url_two as string,url_tree as string] 
-}))
-
-
+const corsConf = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}
+app.use(cors(corsConf))
 
 
 
