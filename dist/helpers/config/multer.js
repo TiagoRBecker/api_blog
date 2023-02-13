@@ -6,9 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Upload = void 0;
 const multer_1 = __importDefault(require("multer"));
 exports.Upload = (0, multer_1.default)({
-    dest: 'uploads/',
-    fileFilter: (req, file, cb) => {
-        const allowed = ['image/jpg', 'image/jpeg', 'image/png'];
-        cb(null, allowed.includes((file.mimetype)));
-    }
+    dest: 'uploads/'
 }).single('file');
