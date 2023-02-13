@@ -5,9 +5,7 @@ import { UserService } from "../../services/Users/usersService";
  
  
 export const UpdateProfile = async (req:Request,res:Response)=>{
-     if(!req.files || !req.file){
-       return res.status(404).json({msg:"Necessário selecionar imagem do perfil"})
-     }
+    
     
     const result = await cloudinary.uploader.upload(req.file?.path  as string, {
       public_id: `${Math.floor(Math.random()*99999)}_profile`,
