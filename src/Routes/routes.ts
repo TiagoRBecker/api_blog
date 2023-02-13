@@ -23,7 +23,7 @@ routes.get("/teste", async (req: Request, res: Response) => {
    
 });
 // Posts Get Routes
-routes.get("/posts",cors(), PostController.GetAllPost);
+routes.get("/posts", PostController.GetAllPost);
 routes.get("/lastposts", PostController.GetLastPost);
 routes.get("/likeposts", PostController.GetLikePost);
 routes.get("/posts/:id", PostController.GetOnePost);
@@ -69,6 +69,6 @@ routes.post("/categories", CategorieController.CreateCategorie);
 
 
 //Files
-routes.post('/user/profile',cors(),chekingToken,Upload, UserController.UpdateProfile )
+routes.post('/user/profile',chekingToken,Upload, UserController.UpdateProfile )
 
 export default routes;

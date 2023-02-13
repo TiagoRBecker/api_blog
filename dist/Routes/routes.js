@@ -8,9 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Categories_1 = require("../controllers/Categories");
@@ -20,7 +17,6 @@ const index_2 = require("../middlewares/Post/index");
 const ChekingErrors_1 = require("../middlewares/Users/ChekingErrors");
 const ChekingErrors_2 = require("../middlewares/Users/ChekingErrors");
 const multer_1 = require("../helpers/config/multer");
-const cors_1 = __importDefault(require("cors"));
 const routes = (0, express_1.Router)();
 routes.get("/teste", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -31,7 +27,7 @@ routes.get("/teste", (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 }));
 // Posts Get Routes
-routes.get("/posts", (0, cors_1.default)(), index_1.PostController.GetAllPost);
+routes.get("/posts", index_1.PostController.GetAllPost);
 routes.get("/lastposts", index_1.PostController.GetLastPost);
 routes.get("/likeposts", index_1.PostController.GetLikePost);
 routes.get("/posts/:id", index_1.PostController.GetOnePost);
@@ -59,5 +55,5 @@ routes.get("/categories/:id", Categories_1.CategorieController.GetCategoriesId);
 routes.post("/categories", Categories_1.CategorieController.CreateCategorie);
 //Update Routes
 //Files
-routes.post('/user/profile', (0, cors_1.default)(), ChekingErrors_2.chekingToken, multer_1.Upload, Users_1.UserController.UpdateProfile);
+routes.post('/user/profile', ChekingErrors_2.chekingToken, multer_1.Upload, Users_1.UserController.UpdateProfile);
 exports.default = routes;
