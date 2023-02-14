@@ -1,5 +1,4 @@
-import express,{ErrorRequestHandler,Response,NextFunction} from "express";
-import { MulterError } from "multer";
+import express,{ErrorRequestHandler,Request,Response,NextFunction} from "express";
 import dotenv from "dotenv"
 import routes from "./Routes/routes";
 import cors from "cors"
@@ -27,21 +26,11 @@ app.use(express.urlencoded({ extended: true} ));
 
 
 
-app.use(fileupload())
 app.use(routes)
+app.use(fileupload())
 
-const errorhandler =  (err:any,res:Response,next:NextFunction)=>{
-        res.status(400)
-        if( err instanceof MulterError){
-          res.json({error:err.code})
 
-        }
-        else{
-          console.log(err)
-          res.json({msg:"Errou ao enivar arquivo"})
-        }
-}
-app.use(errorhandler)
+
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening on ${process.env.PORT}`)
 })

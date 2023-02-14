@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const multer_1 = require("multer");
 const dotenv_1 = __importDefault(require("dotenv"));
 const routes_1 = __importDefault(require("./Routes/routes"));
 const cors_1 = __importDefault(require("cors"));
@@ -20,19 +19,8 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use(fileupload());
 app.use(routes_1.default);
-const errorhandler = (err, res, next) => {
-    res.status(400);
-    if (err instanceof multer_1.MulterError) {
-        res.json({ error: err.code });
-    }
-    else {
-        console.log(err);
-        res.json({ msg: "Errou ao enivar arquivo" });
-    }
-};
-app.use(errorhandler);
+app.use(fileupload());
 app.listen(process.env.PORT, () => {
     console.log(`Example app listening on ${process.env.PORT}`);
 });

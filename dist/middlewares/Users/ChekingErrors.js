@@ -45,13 +45,13 @@ const chekingToken = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     const { authorization } = req.headers;
     const secret = process.env.SECRET;
     if (!authorization) {
-        return res.status(401).json({ msg: "Nao autorizado" });
+        return res.status(401).json({ msg: "Não autorizado" });
     }
     const [authtype, token] = authorization.split(" ");
     if (authtype === "Bearer") {
         const decode = jsonwebtoken_1.default.verify(token, secret, (err, payload) => __awaiter(void 0, void 0, void 0, function* () {
             if (err) {
-                res.status(401).json({ msg: "Nao autorizado" });
+                res.status(401).json({ msg: "Não autorizado" });
             }
             const { id } = payload;
             console.log(id);

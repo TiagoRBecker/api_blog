@@ -13,25 +13,30 @@ exports.UpdateProfile = void 0;
 const cloudinary_1 = require("cloudinary");
 const usersService_1 = require("../../services/Users/usersService");
 const UpdateProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const result = yield cloudinary_1.v2.uploader.upload((_a = req.file) === null || _a === void 0 ? void 0 : _a.path, {
-        public_id: `${Math.floor(Math.random() * 99999)}_profile`,
-        width: 500,
-        height: 500,
-        crop: 'fill',
-    });
+    var _a, _b;
     const { id } = req.user;
     const { name, email } = req.body;
-    const avatar = result.url;
     try {
-        if (result.url) {
+        if ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) {
+            const result = yield cloudinary_1.v2.uploader.upload((_b = req.file) === null || _b === void 0 ? void 0 : _b.path, {
+                public_id: `${Math.floor(Math.random() * 99999)}_profile`,
+                width: 500,
+                height: 500,
+                crop: 'fill',
+            });
+            const avatar = result.url;
             const userUpdate = yield usersService_1.UserService.updateProfile(id, name, email, avatar);
-            res.json({ msg: " Perfil atualizado com sucesso", userUpdate });
+            res.json({ msg: " Perfil atualizado com sucesso" });
+        }
+        else {
+            const avatar = "https://res.cloudinary.com/tiagobecker/image/upload/v1676303352/perfil_ba7vp5.webp";
+            const userUpdate = yield usersService_1.UserService.updateProfile(id, name, email, avatar);
+            res.json({ msg: " Perfil atualizado com sucesso" });
         }
     }
     catch (error) {
-        res.status(404).json({ msg: "Não foi possível atualizar o seu perfil" });
         console.log(error);
+        res.status(404).json({ msg: "Não foi possivel autalizar o perfil" });
     }
 });
 exports.UpdateProfile = UpdateProfile;

@@ -1,7 +1,3 @@
 import multer from "multer";
 
-export const Upload = multer({ 
-    
-    dest: 'uploads/'
-   
-}).single('file')
+export const Upload = multer({ dest: 'uploads/'}).single('file')

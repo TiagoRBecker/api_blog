@@ -62,14 +62,14 @@ export const chekingToken = async (
   const { authorization } = req.headers;
   const secret = process.env.SECRET;
   if (!authorization) {
-    return res.status(401).json({ msg: "Nao autorizado" });
+    return res.status(401).json({ msg: "Não autorizado" });
   }
 
   const [authtype, token] = authorization.split(" ");
   if (authtype === "Bearer") {
     const decode = Jwt.verify(token, secret as string, async (err: any, payload: any) => {
       if (err) {
-        res.status(401).json({ msg: "Nao autorizado" });
+        res.status(401).json({ msg: "Não autorizado" });
         
       }
        

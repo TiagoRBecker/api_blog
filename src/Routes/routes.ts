@@ -6,7 +6,7 @@ import { ErrorCheking } from "../middlewares/Post/index";
 import { ChekingEmail, ChekingUser } from "../middlewares/Users/ChekingErrors";
 import { chekingToken } from "../middlewares/Users/ChekingErrors";
 import { Upload } from "../helpers/config/multer";
-import cors from "cors"
+
 
 
 

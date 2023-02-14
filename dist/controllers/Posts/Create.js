@@ -15,9 +15,6 @@ const cloudinary_1 = require("cloudinary");
 const CreatePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const { title, content, authorId, authorName, categoriesId, } = req.body;
-    if (!req.file || !req.files) {
-        return res.json({ msg: "Necessário selecionar a imagem" });
-    }
     const result = yield cloudinary_1.v2.uploader.upload((_a = req.file) === null || _a === void 0 ? void 0 : _a.path, {
         public_id: `${Math.floor(Math.random() * 99999)}_post`,
         crop: 'fill',
