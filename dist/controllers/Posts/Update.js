@@ -11,15 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateDeslike = exports.UpdateLike = exports.UpdateView = exports.UpdatePost = void 0;
 const postServices_1 = require("../../services/Posts/postServices");
+const cloudinary_1 = require("cloudinary");
 const UpdatePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const { id } = req.params;
-    const { title, content, url } = req.body;
+    const { title, content, categoriesId } = req.body;
     const findOnePost = yield postServices_1.PostServices.findOne(id);
     if (!findOnePost) {
         res.status(404).json({ msg: "Não foi possível encontrar o post" });
     }
     try {
-        const update = yield postServices_1.PostServices.updatePost(id, title, content, url);
+        const result = yield cloudinary_1.v2.uploader.upload((_a = req.file) === null || _a === void 0 ? void 0 : _a.path, {
+            public_id: `${Math.floor(Math.random() * 99999)}_post`,
+            crop: 'fill',
+        });
+        const url = result.url;
+        const update = yield postServices_1.PostServices.updatePost(id, title, content, categoriesId, url);
         res.status(201).json({ update });
     }
     catch (error) {

@@ -35,7 +35,7 @@ routes.get("/views", index_1.PostController.GetViews);
 //Posts Create Routes
 routes.post("/posts", multer_1.Upload, index_1.PostController.CreatePost);
 //Posts Update Routes
-routes.put("/posts/:id", index_1.PostController.UpdatePost);
+routes.put("/posts/:id", multer_1.Upload, index_1.PostController.UpdatePost);
 routes.put("/posts/:id/views", index_1.PostController.UpdateView);
 routes.put("/posts/:id/like", index_1.PostController.UpdateLike);
 routes.put("/posts/:id/deslike", index_1.PostController.UpdateDeslike);

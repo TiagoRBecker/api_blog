@@ -1,17 +1,22 @@
 import  {PostServices} from "../../services/Posts/postServices"
 import { Request, Response } from "express";
-
+import  {v2 as cloudinary} from "cloudinary"
 export const UpdatePost = async (req:Request,res:Response)=>{
     const { id } = req.params
-    const { title, content, url} = req.body
-    
+    const { title, content, categoriesId } = req.body
+     
 
     const  findOnePost = await PostServices.findOne(id)
     if(!findOnePost){
       res.status(404).json({msg:"Não foi possível encontrar o post"})
     }
     try {
-        const update = await PostServices.updatePost(id,title,content,url)
+        const result = await cloudinary.uploader.upload(req.file?.path  as string, {
+            public_id: `${Math.floor(Math.random()*99999)}_post`,
+            crop: 'fill',
+          });
+        const url = result.url
+        const update = await PostServices.updatePost(id,title,content, categoriesId,url)
          res.status(201).json({update})
        } catch (error) {
         console.log(error)

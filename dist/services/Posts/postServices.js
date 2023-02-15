@@ -89,7 +89,7 @@ exports.PostServices = {
             },
         });
     }),
-    updatePost: (id, title, content, url) => __awaiter(void 0, void 0, void 0, function* () {
+    updatePost: (id, title, content, categoriesId, url) => __awaiter(void 0, void 0, void 0, function* () {
         return yield prisma.post.update({
             where: {
                 id: Number(id)
@@ -97,6 +97,7 @@ exports.PostServices = {
             data: {
                 title: title,
                 content: content,
+                categoriesId: categoriesId,
                 url: url,
             }
         });

@@ -31,7 +31,7 @@ routes.get("/views", PostController.GetViews);
 //Posts Create Routes
 routes.post("/posts",Upload, PostController.CreatePost);
 //Posts Update Routes
-routes.put("/posts/:id", PostController.UpdatePost);
+routes.put("/posts/:id",Upload, PostController.UpdatePost);
 
 routes.put("/posts/:id/views", PostController.UpdateView);
 

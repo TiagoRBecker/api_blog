@@ -107,7 +107,7 @@ export  const PostServices ={
        })
 
     },
-    updatePost: async (id: string, title?:string, content?:string, url?:string )=>{
+    updatePost: async (id: string, title?:string, content?:string,categoriesId?:number, url?:string )=>{
         return await  prisma.post.update({
             where:{
                 id:Number(id)
@@ -116,6 +116,7 @@ export  const PostServices ={
 
                 title:title,
                 content:content,
+                categoriesId:categoriesId,
                 url:url,
                 
                 
